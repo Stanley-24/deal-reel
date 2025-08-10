@@ -24,6 +24,17 @@
   feat: add Amazon API integration
 
 
+### Commit Message Types
+
+| Type      | Description                                        | Example                                    |
+|-----------|----------------------------------------------------|--------------------------------------------|
+| feat      | New feature or functionality                       | feat: add Amazon API integration           |
+| fix       | Bug fix                                             | fix: correct null pointer in video worker  |
+| docs      | Documentation changes only                         | docs: update system design diagram         |
+| style     | Code style changes (formatting, no logic changes)  | style: apply Black formatting to models    |
+| refactor  | Code restructuring without changing functionality  | refactor: split posting agent into modules |
+| test      | Adding or modifying tests                          | test: add unit tests for API client        |
+
 
 ## Folder Naming
 - Use lowercase with underscores for folders: `video_worker/`
