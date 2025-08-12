@@ -1,7 +1,7 @@
-# Deal Reel
+# Deal on Reels
 
 ## 1. Brand Vision
-**Deal Reel** is a fully automated affiliate marketing system that:
+**Deal on Reels** is a fully automated affiliate marketing system that:
 - Fetches trending products from Amazon via the official **Product Advertising API**.
 - Creates 40-second storytelling videos for each product using free AI tools.
 - Posts **3 videos daily** to **Meta** and **TikTok** with affiliate links.
@@ -32,7 +32,7 @@ We are a **team of one founder-engineer**, starting with:
 ---
 
 ## 4. Microservice Naming
-- **Deal Reel** → Brand & entire system.
+- **Deal on Reels** → Brand & entire system.
 - **Post Mint** → Content-generation microservice.
 
 ---
@@ -55,13 +55,14 @@ All project documents are stored in `/docs`:
 - **PROGRESS.md** — Daily progress log.
 - **INFRASTRUCTURE.md** — Dev environment setup instructions.
 - **RESEARCH.md** — Free tools, APIs, and technical notes.
+- **PHASE2_LIVE_SWITCH.md** — Live Amazon API integration tracking.
 
 ---
 
 ## 7. Roadmap Snapshot
 - **Phase 0** — Documentation & repo setup ✅
 - **Phase 1** — Infrastructure setup (local Postgres, Python, Java, TypeScript)
-- **Phase 2** — Amazon API integration
+- **Phase 2** — Amazon API integration ✅ (Mock mode complete, Live mode pending API approval)
 - **Phase 3** — Video generation pipeline
 - **Phase 4** — Posting automation
 - **Phase 5** — Click tracking & optimization

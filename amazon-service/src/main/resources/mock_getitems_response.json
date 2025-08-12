@@ -1,0 +1,38 @@
+{
+  "ItemsResult": {
+    "Items": [
+      {
+        "ASIN": "B07PGL2ZSL",
+        "ItemInfo": {
+          "Title": {"DisplayValue": "Sample Product One"}
+        },
+        "Images": {
+          "Primary": {
+            "Small": {"URL": "https://example.com/image1_small.jpg"}
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {"Price": {"DisplayAmount": "$19.99"}}
+          ]
+        }
+      },
+      {
+        "ASIN": "B08N5WRWNW",
+        "ItemInfo": {
+          "Title": {"DisplayValue": "Sample Product Two"}
+        },
+        "Images": {
+          "Primary": {
+            "Small": {"URL": "https://example.com/image2_small.jpg"}
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {"Price": {"DisplayAmount": "$29.99"}}
+          ]
+        }
+      }
+    ]
+  }
+}

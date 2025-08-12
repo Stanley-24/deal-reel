@@ -1,0 +1,13 @@
+# Ignore environment files with secrets
+.env
+
+# Maven build directory
+target/
+
+# Logs
+*.log
+
+# IDE configs (optional, depends on your IDE)
+*.iml
+.idea/
+.vscode/
