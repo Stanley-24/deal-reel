@@ -13,9 +13,10 @@
 - Python, Java, Node.js setup
 - Basic service structure
 
-## Phase 2 — Amazon API Integration
+## Phase 2 — Amazon API Integration ✅
 - Fetch trending products
 - Store in database
+- **Live Mode Switch** (Optional - requires Amazon API approval)
 
 ## Phase 3 — Video Generation
 - Integrate free AI video tools

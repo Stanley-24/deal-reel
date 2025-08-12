@@ -20,7 +20,7 @@ We welcome all kinds of contributions — code, documentation, design, research,
 
 
 4. **Make Changes**
-      - Follow our [Style Guide](https://github.com/Stanley-24/deal-reel/blob/main/docs/STYLE_GUIDE.md) for consistency.
+      - Follow our [Style Guide](https://github.com/Stanley-24/deal-on-reels/blob/main/docs/STYLE_GUIDE.md) for consistency.
       - Update documentation if your change impacts usage.
 
 

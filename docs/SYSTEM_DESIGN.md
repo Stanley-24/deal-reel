@@ -1,7 +1,7 @@
 # 📐 System Design
 
 ## 1. Overview
-Deal Reel is a fully automated affiliate marketing system that:
+Deal on Reels is a fully automated affiliate marketing system that:
 
 - Fetches trending products from Amazon via the Product Advertising API using a Java microservice.
 - Stores product details in PostgreSQL.
