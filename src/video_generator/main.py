@@ -24,6 +24,7 @@ class VideoItem(BaseModel):
     asin: str
     title: Optional[str] = None
     video_url: str
+    product_url: Optional[str] = None
 
 def fetch_product_by_asin(asin: str):
     # Some deployments may not yet have description/price columns. Use NULL placeholders to avoid errors.
@@ -46,28 +47,37 @@ def fetch_product_by_asin(asin: str):
 @app.get("/videos", response_model=List[VideoItem])
 def list_videos(limit: int = Query(50, ge=1, le=500), offset: int = Query(0, ge=0)):
     """List products that have a saved video_url for scheduler consumption."""
-    query = text(
-        """
-        SELECT asin, title, video_url
-        FROM products
-        WHERE video_url IS NOT NULL AND video_url != ''
-        ORDER BY asin
-        LIMIT :limit OFFSET :offset
-        """
-    )
-    with engine.connect() as conn:
-        rows = conn.execute(query, {"limit": limit, "offset": offset}).fetchall()
-    return [VideoItem(asin=r[0], title=r[1], video_url=r[2]) for r in rows]
+    # Ensure columns exist to avoid errors on older schemas
+    with engine.begin() as conn:
+        conn.execute(text("ALTER TABLE products ADD COLUMN IF NOT EXISTS video_url TEXT"))
+        conn.execute(text("ALTER TABLE products ADD COLUMN IF NOT EXISTS product_url TEXT"))
+        rows = conn.execute(
+            text(
+                """
+                SELECT asin, title, video_url, product_url
+                FROM products
+                WHERE video_url IS NOT NULL AND video_url != ''
+                ORDER BY asin
+                LIMIT :limit OFFSET :offset
+                """
+            ),
+            {"limit": limit, "offset": offset},
+        ).fetchall()
+    return [VideoItem(asin=r[0], title=r[1], video_url=r[2], product_url=r[3]) for r in rows]
 
 @app.get("/products/{asin}", response_model=VideoItem)
 def get_product_video(asin: str):
     """Fetch a single product's saved video URL."""
-    query = text("SELECT asin, title, video_url FROM products WHERE asin = :asin")
-    with engine.connect() as conn:
-        row = conn.execute(query, {"asin": asin}).fetchone()
+    with engine.begin() as conn:
+        conn.execute(text("ALTER TABLE products ADD COLUMN IF NOT EXISTS video_url TEXT"))
+        conn.execute(text("ALTER TABLE products ADD COLUMN IF NOT EXISTS product_url TEXT"))
+        row = conn.execute(
+            text("SELECT asin, title, video_url, product_url FROM products WHERE asin = :asin"),
+            {"asin": asin},
+        ).fetchone()
     if not row or not row[2]:
         raise HTTPException(status_code=404, detail="Video not found for this ASIN")
-    return VideoItem(asin=row[0], title=row[1], video_url=row[2])
+    return VideoItem(asin=row[0], title=row[1], video_url=row[2], product_url=row[3])
 
 @app.post("/generate-video")
 def generate_product_video(data: ProductRequest):
@@ -122,13 +132,21 @@ def generate_product_video(data: ProductRequest):
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"Upload to S3 failed: {str(e)}")
 
-    # 6. Persist S3 URL in database so other agents can use it later
+    # 6. Persist S3 URL and product link in database so other agents can use it later
+    default_product_url = f"https://www.amazon.com/dp/{product['asin']}"
     try:
         with engine.begin() as conn:
             conn.execute(text("ALTER TABLE products ADD COLUMN IF NOT EXISTS video_url TEXT"))
+            conn.execute(text("ALTER TABLE products ADD COLUMN IF NOT EXISTS product_url TEXT"))
+            # Update video_url
             conn.execute(
                 text("UPDATE products SET video_url = :url WHERE asin = :asin"),
                 {"url": video_url, "asin": product["asin"]},
+            )
+            # Only set product_url if it's NULL or empty
+            conn.execute(
+                text("UPDATE products SET product_url = :purl WHERE asin = :asin AND (product_url IS NULL OR product_url = '')"),
+                {"purl": default_product_url, "asin": product["asin"]},
             )
     except Exception as e:
         # Not fatal for the API response, but report failure clearly
@@ -138,5 +156,6 @@ def generate_product_video(data: ProductRequest):
         "asin": product['asin'],
         "title": product['title'],
         "video_url": video_url,
+        "product_url": default_product_url,
         "mock": use_mock
     }
