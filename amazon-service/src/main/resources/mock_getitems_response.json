@@ -3,12 +3,13 @@
     "Items": [
       {
         "ASIN": "B07PGL2ZSL",
+        "DetailPageURL": "https://www.amazon.com/dp/B07PGL2ZSL",
         "ItemInfo": {
-          "Title": {"DisplayValue": "Sample Product One"}
+          "Title": {"DisplayValue": "Face Moisturizer"}
         },
         "Images": {
           "Primary": {
-            "Small": {"URL": "https://example.com/image1_small.jpg"}
+            "Small": {"URL": "https://m.media-amazon.com/images/I/716zIMHh+hL._SX522_.jpg"}
           }
         },
         "Offers": {
@@ -19,6 +20,7 @@
       },
       {
         "ASIN": "B08N5WRWNW",
+        "DetailPageURL": "https://www.amazon.com/dp/B08N5WRWNW",
         "ItemInfo": {
           "Title": {"DisplayValue": "Sample Product Two"}
         },

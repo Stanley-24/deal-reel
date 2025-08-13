@@ -1,0 +1,88 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.env
+.venv
+venv/
+ENV/
+env/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+.pyre/
+.mypy_cache/
+
+# Jupyter
+.ipynb_checkpoints
+
+# MacOS
+.DS_Store
+
+# VSCode/IDE
+.vscode/
+.idea/
+
+# Logs
+logs/
+*.log
+
+# Local data
+/tmp/
+videos/
+
+# Model weights / large assets
+models/
+
+# Node (if present later for post_mint)
+node_modules/
+
+# AWS / credentials (do not commit secrets)
+*.pem
+*.key
+.aws/
+
+# Python dotenv
+*.env
+
+# Generated artifacts
+*.mp4
+*.webm
+*.mov
+*.gif
+*.png
+*.jpg
+*.jpeg
+
